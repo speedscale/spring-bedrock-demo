@@ -1,0 +1,33 @@
+name: CI
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+      - name: Check deployment and launcher syntax
+        run: for script in scripts/*.sh; do bash -n "$script"; done
+      - name: Build and test without AWS credentials
+        run: ./mvnw -B -ntp verify
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Validate OpenAPI contract
+        run: |
+          python -m pip install openapi-spec-validator==0.7.2
+          python -m openapi_spec_validator src/main/resources/static/openapi.yaml
+      - name: Render Kubernetes deployment
+        run: kubectl kustomize k8s/base > /tmp/deployment.yaml
+      - name: Build container
+        run: docker build -t spring-bedrock-demo:ci .

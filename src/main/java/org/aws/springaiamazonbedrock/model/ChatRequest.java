@@ -1,32 +1,7 @@
 package org.aws.springaiamazonbedrock.model;
 
-import java.util.List;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
-public class ChatRequest {
-    private String prompt;
-    private List<ChatMessage> history;
-
-    public ChatRequest() {
-    }
-
-    public ChatRequest(String prompt, List<ChatMessage> history) {
-        this.prompt = prompt;
-        this.history = history;
-    }
-
-    public String getPrompt() {
-        return prompt;
-    }
-
-    public void setPrompt(String prompt) {
-        this.prompt = prompt;
-    }
-
-    public List<ChatMessage> getHistory() {
-        return history;
-    }
-
-    public void setHistory(List<ChatMessage> history) {
-        this.history = history;
-    }
+public record ChatRequest(@NotBlank @Size(max = 4000) String prompt) {
 }
