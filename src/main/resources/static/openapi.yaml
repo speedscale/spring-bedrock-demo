@@ -1,0 +1,88 @@
+openapi: 3.0.3
+info:
+  title: Spring Bedrock Demo API
+  version: 0.1.0
+  description: A stateless support assistant backed by Amazon Bedrock Converse.
+paths:
+  /api/chat:
+    post:
+      operationId: chat
+      summary: Ask the support assistant a question
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChatRequest'
+            example:
+              prompt: How do I reset my password?
+      responses:
+        '200':
+          description: The assistant's response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ChatResponse'
+        '400':
+          description: Missing, blank, oversized, malformed, or unknown input
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '503':
+          description: Bedrock failed or returned no text
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /actuator/health:
+    get:
+      operationId: health
+      summary: Application health, without making a Bedrock call
+      responses:
+        '200':
+          description: The application is healthy
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Health'
+        '503':
+          description: The application is unhealthy
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Health'
+components:
+  schemas:
+    ChatRequest:
+      type: object
+      additionalProperties: false
+      required: [prompt]
+      properties:
+        prompt:
+          type: string
+          minLength: 1
+          maxLength: 4000
+          pattern: '\S'
+    ChatResponse:
+      type: object
+      additionalProperties: false
+      required: [response]
+      properties:
+        response:
+          type: string
+          minLength: 1
+    ErrorResponse:
+      type: object
+      additionalProperties: false
+      required: [error]
+      properties:
+        error:
+          type: string
+          minLength: 1
+    Health:
+      type: object
+      required: [status]
+      properties:
+        status:
+          type: string
