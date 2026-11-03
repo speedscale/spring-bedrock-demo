@@ -41,4 +41,3 @@ build/
 
 # Local traffic snapshots and replay output
 proxymock/
-__pycache__/

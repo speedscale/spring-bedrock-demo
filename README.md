@@ -25,13 +25,13 @@ Successful calls return `{"response":"..."}`. Invalid requests return HTTP 400; 
 
 ## Generate a little traffic
 
-Use Python 3 to send a finite mix of valid chat prompts, rejected blank prompts and health checks:
+Use Bash and curl to send a finite mix of valid chat prompts, rejected blank prompts and health checks:
 
 ```bash
-python3 scripts/traffic-client.py --base-url http://localhost:8080 --output /tmp/bedrock-run.json
+./scripts/traffic-client.sh --base-url http://localhost:8080 --output /tmp/bedrock-run.json
 ```
 
-The default is 30 sequential requests, two seconds apart, with at most 16 paid chat calls. It stops on an unexpected status or invalid response and never retries. Use `--count` and `--interval` to change the bounds. Health checks and rejected blank prompts do not call Bedrock. The JSON summary records the UTC capture window and run ID; every request carries that ID in `X-Demo-Run`. Keep capture and snapshot configuration in your private environment.
+The default is 30 sequential requests, two seconds apart, with at most 16 paid chat calls. It checks HTTP status codes, stops on an unexpected status or connection error, and never retries. Use `--count` and `--interval` to change the bounds. Health checks and rejected blank prompts do not call Bedrock. The JSON summary records the UTC capture window and run ID; every request carries that ID in `X-Demo-Run`. Keep capture and snapshot configuration in your private environment.
 
 ## API contract and CI
 
