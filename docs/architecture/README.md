@@ -1,6 +1,6 @@
 # Architecture diagrams
 
-The README embeds SVG exports so AWS icons render on GitHub. The editable Mermaid sources are [application.mmd](application.mmd), [capture-storage.mmd](capture-storage.mmd), and [local-testing.mmd](local-testing.mmd). Namespace names are examples, including `observability` for the collector; actual cluster settings stay in a private overlay.
+The README embeds SVG exports so AWS icons render on GitHub. The editable Mermaid sources are [application.mmd](application.mmd), [capture-storage.mmd](capture-storage.mmd), and [local-testing.mmd](local-testing.mmd). The collector uses `byoc-s3`, matching the [documented S3 BYOC installation](https://docs.speedscale.com/byoc/configure-kubernetes/#amazon-s3-with-eks-iam-roles-for-service-accounts). Account, bucket and IAM role values stay in a private overlay.
 
 To regenerate, install Node.js and Chrome/Chromium, then run `npm ci` and `npm run render` in this directory. Set `CHROME_BIN` if Chrome is not at the macOS default path. Commit the updated Mermaid sources and SVGs together. The renderer also creates local HTML viewers and 4K PNGs, which are ignored by Git.
 
