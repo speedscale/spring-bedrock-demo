@@ -12,7 +12,7 @@ export AWS_PROFILE=your-profile
 ./scripts/run-app.sh
 ```
 
-Set `JAVA_HOME` to your JDK 21 installation. The API listens on port 8080. Override `PORT`, `AWS_REGION`, or `BEDROCK_MODEL_ID` as needed. The defaults are `us-east-1` and `us.amazon.nova-micro-v1:0`; the model must be available in your account. Each successful chat request makes a paid Bedrock call.
+Set `JAVA_HOME` to your JDK 21 installation. The API listens on port 8080. Override `PORT`, `AWS_REGION`, or `BEDROCK_MODEL_ID` as needed. The defaults are `us-east-1` and `us.anthropic.claude-sonnet-4-6`; the model must be available in your account. Each successful chat request makes a paid Bedrock call.
 
 ```bash
 curl --fail http://localhost:8080/api/chat \
