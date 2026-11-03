@@ -23,5 +23,12 @@ window.drawArchitecture = async (source, packs) => {
   const {svg} = await mermaid.render('architectureDiagram', source);
   document.querySelector('#diagram').innerHTML = svg;
   await document.fonts.ready;
-  return new XMLSerializer().serializeToString(document.querySelector('#diagram > svg'));
+  const root = document.querySelector('#diagram > svg');
+  const [x, y, width, height] = root.getAttribute('viewBox').split(/\s+/);
+  const backdrop = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+  for (const [key, value] of Object.entries({x, y, width, height, fill: '#FFFFFF'})) {
+    backdrop.setAttribute(key, value);
+  }
+  root.insertBefore(backdrop, root.firstChild);
+  return new XMLSerializer().serializeToString(root);
 };
