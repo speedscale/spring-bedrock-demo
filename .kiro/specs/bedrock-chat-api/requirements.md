@@ -33,7 +33,7 @@ As a developer, I can build the same app for local use and a private cluster.
 3. The public Kubernetes base is a template: one replica, ClusterIP service, resource limits, a non-root container, and health probes. Its current `bedrock-credentials` Secret reference is a fallback template, not the authentication setup of the private EKS deployment.
 4. Private IRSA configuration replaces that Secret reference and supplies the service account and web-identity configuration. Accounts, roles, cluster names, buckets, tenant configuration, credentials, and sealed-secret manifests stay outside the public repository.
 5. Speedscale capture and AWS S3 BYOC are configured privately. Adding proxymock live must not require publishing captured private data.
-6. There is no public ingress or application authentication. Demo access uses port-forwarding or a privately configured authenticated entry point.
+6. There is no public ingress or application authentication. Demo traffic uses the API client Job through the Kubernetes Service DNS name. Port-forwarding is available for local debugging.
 
 ## 4. Publish and verify the API
 

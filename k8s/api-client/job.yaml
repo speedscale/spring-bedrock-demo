@@ -1,0 +1,68 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  generateName: bedrock-api-client-
+  namespace: spring-bedrock-demo
+spec:
+  backoffLimit: 0
+  activeDeadlineSeconds: 480
+  ttlSecondsAfterFinished: 3600
+  template:
+    metadata:
+      labels:
+        app: bedrock-api-client
+    spec:
+      restartPolicy: Never
+      automountServiceAccountToken: false
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 10001
+        runAsGroup: 10001
+        seccompProfile:
+          type: RuntimeDefault
+      containers:
+        - name: api-client
+          image: curlimages/curl:8.23.0
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities:
+              drop: [ALL]
+          resources:
+            requests:
+              cpu: 10m
+              memory: 32Mi
+            limits:
+              cpu: 100m
+              memory: 64Mi
+          command:
+            - /bin/sh
+            - -c
+            - |
+              set -eu
+              base_url=http://spring-bedrock-demo.spring-bedrock-demo.svc.cluster.local:8080
+              run_id="$HOSTNAME"
+              started_at=$(date -u +%Y-%m-%dT%H:%M:%SZ)
+              i=1; ok=0; rejected=0
+              printf 'Run %s: 30 requests through %s; at most 16 paid chat calls; no retries.\n' "$run_id" "$base_url"
+              while [ "$i" -le 30 ]; do
+                if [ "$i" -gt 1 ]; then sleep 2; fi
+                method=POST; path=/api/chat; expected=200
+                case $(( (i - 1) % 4 )) in
+                  0) body='{"prompt":"How do I reset my password? Answer in one sentence."}' ;;
+                  1) body='{"prompt":"What should I do if I cannot sign in? Answer in one sentence."}' ;;
+                  2) body='{"prompt":""}'; expected=400 ;;
+                  3) method=GET; path=/actuator/health; body= ;;
+                esac
+                set -- --silent --show-error --retry 0 --max-time 35 --output /dev/null --write-out '%{http_code}' --request "$method" --header 'Accept: application/json' --header "X-Demo-Run: $run_id"
+                if [ "$method" = POST ]; then
+                  set -- "$@" --header 'Content-Type: application/json' --data "$body"
+                fi
+                status=$(curl "$@" "$base_url$path")
+                printf '%s/30 %s %s: HTTP %s\n' "$i" "$method" "$path" "$status"
+                [ "$status" = "$expected" ] || exit 1
+                case "$status" in 200) ok=$((ok+1));; 400) rejected=$((rejected+1));; esac
+                i=$((i+1))
+              done
+              finished_at=$(date -u +%Y-%m-%dT%H:%M:%SZ)
+              printf '{"run_id":"%s","started_at":"%s","finished_at":"%s","passed":30,"statuses":{"200":%s,"400":%s},"base_url":"%s"}\n' "$run_id" "$started_at" "$finished_at" "$ok" "$rejected" "$base_url"
