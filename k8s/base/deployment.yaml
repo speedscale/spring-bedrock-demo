@@ -34,7 +34,7 @@ spec:
             - name: AWS_REGION
               value: us-east-1
             - name: BEDROCK_MODEL_ID
-              value: us.amazon.nova-micro-v1:0
+              value: us.anthropic.claude-sonnet-5-5
           envFrom:
             - secretRef:
                 name: bedrock-credentials
