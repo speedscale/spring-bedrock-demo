@@ -1,0 +1,39 @@
+flowchart LR
+  subgraph AWS["AWS"]
+    direction LR
+    subgraph EKS["Amazon EKS"]
+      direction LR
+      subgraph APP["Namespace: spring-bedrock-demo"]
+        direction LR
+        WORKLOAD["Spring Boot API<br/>+ Java capture agent"]
+      end
+      subgraph SPEEDSCALE["Namespace: speedscale"]
+        direction LR
+        OPERATOR["Speedscale<br/>operator"]
+        NETTAP["Speedscale<br/>nettap"]
+        FORWARDER["Speedscale<br/>forwarder"]
+      end
+      subgraph COLLECTORS["Namespace: observability"]
+        direction LR
+        COLLECTOR["OpenTelemetry<br/>collector"]
+      end
+    end
+    S3@{ icon: "aws:s3", label: "Amazon S3<br/>Traffic + snapshots", pos: "b", h: 80 }
+  end
+  CLOUD["Speedscale<br/>Cloud"]
+
+  WORKLOAD <-.- OPERATOR
+  WORKLOAD --> NETTAP
+  NETTAP --> FORWARDER
+  FORWARDER --> COLLECTOR
+  COLLECTOR --> S3
+  FORWARDER --> CLOUD
+
+  classDef capture fill:#E8F5F0,stroke:#97CDBD,color:#146B5A,stroke-width:2px
+  class WORKLOAD,OPERATOR,NETTAP,FORWARDER,COLLECTOR,CLOUD capture
+  style AWS fill:#FFFFFF,stroke:#9BAABA,stroke-width:2px
+  style EKS fill:#F4F8FF,stroke:#9DB9E0,stroke-width:2px
+  style APP fill:#FFFFFF,stroke:#C5D2E4
+  style SPEEDSCALE fill:#FFFFFF,stroke:#C5D2E4
+  style COLLECTORS fill:#FFFFFF,stroke:#C5D2E4
+  linkStyle 0,1,2,3,4,5 stroke:#16816D,stroke-width:2px

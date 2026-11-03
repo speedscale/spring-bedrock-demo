@@ -1,0 +1,13 @@
+{
+  "dependencies": {
+    "esbuild": "0.28.2",
+    "mermaid": "12.3.0",
+    "playwright-core": "1.64.1"
+  },
+  "name": "spring-bedrock-architecture",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "render": "node render.mjs"
+  }
+}

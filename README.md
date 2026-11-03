@@ -2,6 +2,24 @@
 
 A Java 21 Spring Boot API that sends support questions to Amazon Bedrock Converse. Forked from [AWS's Spring AI Bedrock sample](https://github.com/aws-samples/sample-springai-amazonbedrock), with the interactive console, temperature examples, and RAG removed. One process, one cloud dependency, no database.
 
+## Architecture
+
+Example deployment and demo workflow. IRSA, capture and storage settings belong in a private overlay.
+
+### Application architecture
+
+![API traffic generator, Kubernetes Service and Spring Boot API in EKS calling Bedrock Sonnet 5.5 and STS](docs/architecture/application.svg)
+
+### Capture and storage
+
+![Speedscale capture routed through Kubernetes namespaces to S3 and Speedscale Cloud](docs/architecture/capture-storage.svg)
+
+### Local testing in Kiro
+
+![Pull an S3 snapshot into Kiro, mock AWS calls, replay tests, and check assertions and OpenAPI schema coverage](docs/architecture/local-testing.svg)
+
+[Mermaid sources and rendering instructions](docs/architecture/README.md).
+
 ## Run locally
 
 Install JDK 21 and configure AWS credentials with access to Bedrock. The application uses the AWS SDK default credential chain. When `AWS_PROFILE` is set, the launcher uses AWS CLI v2 and Python 3 to export that profile's current credentials into the JVM environment without writing them to disk.

@@ -1,0 +1,28 @@
+flowchart LR
+  subgraph AWS["AWS"]
+    direction LR
+    subgraph EKS["Amazon EKS"]
+      direction LR
+      subgraph APP["Namespace: spring-bedrock-demo"]
+        direction LR
+        CLIENT["API traffic<br/>generator (curl)"]
+        SERVICE["Kubernetes<br/>Service"]
+        API["Spring Boot API<br/>POST /api/chat"]
+      end
+    end
+    STS@{ icon: "aws:sts", label: "AWS STS / IRSA", pos: "b", h: 72 }
+    BEDROCK@{ icon: "aws:bedrock", label: "Amazon Bedrock<br/>Claude Sonnet 5.5", pos: "b", h: 80 }
+  end
+
+  CLIENT <--> SERVICE
+  SERVICE <--> API
+  API <--> BEDROCK
+  API <-.-> STS
+
+  classDef app fill:#FFFFFF,stroke:#9DB9E0,color:#182B43,stroke-width:2px
+  class CLIENT,SERVICE,API app
+  style AWS fill:#FFFFFF,stroke:#9BAABA,stroke-width:2px
+  style EKS fill:#F4F8FF,stroke:#9DB9E0,stroke-width:2px
+  style APP fill:#FFFFFF,stroke:#C5D2E4
+  linkStyle 0,1,2 stroke:#2864D8,stroke-width:2px
+  linkStyle 3 stroke:#9252B5,stroke-width:2px

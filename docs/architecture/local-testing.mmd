@@ -1,0 +1,22 @@
+flowchart LR
+  S3@{ icon: "aws:s3", label: "Amazon S3<br/>Recorded snapshot", pos: "b", h: 80 }
+  subgraph LOCAL["Local machine / Kiro"]
+    direction LR
+    KIRO["Kiro + proxymock"]
+    APP["Local Spring Boot app"]
+    MOCK["Mocked AWS calls<br/>Bedrock + STS"]
+    CHECKS["Status + body assertions<br/>OpenAPI schema coverage"]
+
+    KIRO <-->|Replay tests| APP
+    APP <--> MOCK
+    KIRO --> CHECKS
+  end
+  S3 -->|Pull snapshot| LOCAL
+
+  classDef local fill:#F4F8FF,stroke:#9DB9E0,color:#182B43,stroke-width:2px
+  classDef mock fill:#E8F5F0,stroke:#97CDBD,color:#146B5A,stroke-width:2px
+  class KIRO,APP,CHECKS local
+  class MOCK mock
+  style LOCAL fill:#F8FAFD,stroke:#9DB9E0,stroke-width:2px
+  linkStyle 0,1,2 stroke:#2864D8,stroke-width:2px
+  linkStyle 3 stroke:#16816D,stroke-width:2px
