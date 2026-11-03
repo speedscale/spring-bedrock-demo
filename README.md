@@ -41,15 +41,17 @@ curl --fail http://localhost:8080/api/chat \
 
 Successful calls return `{"response":"..."}`. Invalid requests return HTTP 400; Bedrock failures or empty model responses return HTTP 503 with `{"error":"..."}`. Requests accept only a nonblank `prompt`, up to 4000 characters. Each request is independent, with no conversation history or streaming.
 
-## Generate a little traffic
+## Generate demo traffic in Kubernetes
 
-Use Bash and curl to send a finite mix of valid chat prompts, rejected blank prompts and health checks:
+With the app deployed and kubectl pointed at your demo cluster, run the [API client Job](k8s/api-client/job.yaml). It calls the Kubernetes Service at `http://spring-bedrock-demo.spring-bedrock-demo.svc.cluster.local:8080`, so captured requests use the Service hostname.
 
 ```bash
-./scripts/traffic-client.sh --base-url http://localhost:8080 --output /tmp/bedrock-run.json
+job=$(kubectl create -f k8s/api-client/job.yaml -o name)
+kubectl -n spring-bedrock-demo logs -f "$job" --pod-running-timeout=120s
+kubectl -n spring-bedrock-demo wait --for=condition=complete "$job" --timeout=480s
 ```
 
-The default is 30 sequential requests, two seconds apart, with at most 16 paid chat calls. It checks HTTP status codes, stops on an unexpected status or connection error, and never retries. Use `--count` and `--interval` to change the bounds. Health checks and rejected blank prompts do not call Bedrock. The JSON summary records the UTC capture window and run ID; every request carries that ID in `X-Demo-Run`. Keep capture and snapshot configuration in your private environment.
+Each run creates a new Job: 30 sequential requests, two seconds apart, with at most 16 paid Bedrock calls. It mixes valid prompts, rejected blank prompts and health checks, stops on an unexpected status or connection error, and never retries. Logs include the UTC capture window and `X-Demo-Run` marker. Jobs expire after one hour. Keep capture and snapshot configuration private.
 
 ## API contract and CI
 
@@ -61,7 +63,7 @@ The checked-in contract is [openapi.yaml](src/main/resources/static/openapi.yaml
 
 The reusable [Kubernetes base](k8s/base) provides one replica, a ClusterIP service, resource limits, a non-root container, and health probes. Supply your image and a `bedrock-credentials` Secret from a private deployment overlay. The application supports standard AWS environment credentials; cluster-specific credentials, capture configuration, storage settings, and endpoints belong outside this public repository.
 
-Health checks do not call Bedrock. The API has no authentication or public ingress. Access it through port-forwarding unless your private deployment provides an authenticated entry point. The starting application contains no recorded traffic, replay pipeline, or repository-specific testing skill.
+Health checks do not call Bedrock. The API has no authentication or public ingress. Use the API client Job for demo traffic; port-forwarding is available for local debugging. The starting application contains no recorded traffic, replay pipeline, or repository-specific testing skill.
 
 ## License
 
