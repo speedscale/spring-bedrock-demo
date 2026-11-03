@@ -38,6 +38,3 @@ build/
 .claude/
 .env*
 *.log
-
-# Local traffic snapshots and replay output
-proxymock/
