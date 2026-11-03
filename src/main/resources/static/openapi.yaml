@@ -46,10 +46,16 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Health'
+            application/vnd.spring-boot.actuator.v3+json:
+              schema:
+                $ref: '#/components/schemas/Health'
         '503':
           description: The application is unhealthy
           content:
             application/json:
+              schema:
+                $ref: '#/components/schemas/Health'
+            application/vnd.spring-boot.actuator.v3+json:
               schema:
                 $ref: '#/components/schemas/Health'
 components:
@@ -86,3 +92,7 @@ components:
       properties:
         status:
           type: string
+        groups:
+          type: array
+          items:
+            type: string
