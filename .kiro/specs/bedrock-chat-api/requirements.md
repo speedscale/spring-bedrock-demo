@@ -28,7 +28,7 @@ As a client, I receive predictable errors without upstream details.
 
 As a developer, I can build the same app for local use and a private cluster.
 
-1. `PORT`, `AWS_REGION`, and `BEDROCK_MODEL_ID` configure the app. Defaults are 8080, `us-east-1`, and `us.anthropic.claude-sonnet-4-6`.
+1. `PORT`, `AWS_REGION`, and `BEDROCK_MODEL_ID` configure the app. Defaults are 8080, `us-east-1`, and `us.anthropic.claude-sonnet-5-5`.
 2. AWS authentication uses the SDK credential chain. Local profile export is temporary. EKS deployment uses IRSA through private deployment configuration, with renewable role credentials.
 3. The public Kubernetes base is a template: one replica, ClusterIP service, resource limits, a non-root container, and health probes. Its current `bedrock-credentials` Secret reference is a fallback template, not the authentication setup of the private EKS deployment.
 4. Private IRSA configuration replaces that Secret reference and supplies the service account and web-identity configuration. Accounts, roles, cluster names, buckets, tenant configuration, credentials, and sealed-secret manifests stay outside the public repository.
