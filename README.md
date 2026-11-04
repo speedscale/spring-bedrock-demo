@@ -4,7 +4,7 @@ A Java 21 Spring Boot API that sends support questions to Amazon Bedrock Convers
 
 ## Architecture
 
-Example deployment and demo workflow. IRSA, capture and storage settings belong in a private overlay.
+Example deployment and demo workflow. The S3 collector follows the [documented BYOC installation](https://docs.speedscale.com/byoc/configure-kubernetes/#amazon-s3-with-eks-iam-roles-for-service-accounts) in namespace `byoc-s3`. IRSA, capture and storage settings belong in a private overlay.
 
 ### Application architecture
 
