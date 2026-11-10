@@ -1,0 +1,244 @@
+{
+  "id": "spring-bedrock-demo-capture",
+  "redactlist": {
+    "entries": {
+      "all": [
+        "authorization",
+        "proxy-authorization",
+        "cookie",
+        "set-cookie",
+        "x-amz-security-token",
+        "x-api-key",
+        "api-key",
+        "webidentitytoken",
+        "accesskeyid",
+        "secretaccesskey",
+        "sessiontoken",
+        "password",
+        "email",
+        "ssn",
+        "rolearn",
+        "rolesessionname"
+      ]
+    }
+  },
+  "protected": false,
+  "discoverPatterns": true,
+  "name": "Spring Bedrock demo capture redaction",
+  "transforms": [
+    {
+      "id": "redact-sts-accesskeyid",
+      "filters": {
+        "filters": [
+          {
+            "include": true,
+            "service": "spring-bedrock-demo"
+          },
+          {
+            "include": true,
+            "namespace": "spring-bedrock-demo"
+          },
+          {
+            "include": true,
+            "tech": "STS"
+          }
+        ]
+      },
+      "extractor": {
+        "type": "res_body"
+      },
+      "transforms": [
+        {
+          "type": "xml_path",
+          "config": {
+            "path": "//*[local-name()='AccessKeyId']/text()"
+          }
+        },
+        {
+          "type": "dlp_field",
+          "config": {}
+        }
+      ]
+    },
+    {
+      "id": "redact-sts-secretaccesskey",
+      "filters": {
+        "filters": [
+          {
+            "include": true,
+            "service": "spring-bedrock-demo"
+          },
+          {
+            "include": true,
+            "namespace": "spring-bedrock-demo"
+          },
+          {
+            "include": true,
+            "tech": "STS"
+          }
+        ]
+      },
+      "extractor": {
+        "type": "res_body"
+      },
+      "transforms": [
+        {
+          "type": "xml_path",
+          "config": {
+            "path": "//*[local-name()='SecretAccessKey']/text()"
+          }
+        },
+        {
+          "type": "dlp_field",
+          "config": {}
+        }
+      ]
+    },
+    {
+      "id": "redact-sts-sessiontoken",
+      "filters": {
+        "filters": [
+          {
+            "include": true,
+            "service": "spring-bedrock-demo"
+          },
+          {
+            "include": true,
+            "namespace": "spring-bedrock-demo"
+          },
+          {
+            "include": true,
+            "tech": "STS"
+          }
+        ]
+      },
+      "extractor": {
+        "type": "res_body"
+      },
+      "transforms": [
+        {
+          "type": "xml_path",
+          "config": {
+            "path": "//*[local-name()='SessionToken']/text()"
+          }
+        },
+        {
+          "type": "dlp_field",
+          "config": {}
+        }
+      ]
+    },
+    {
+      "id": "redact-sts-arn",
+      "filters": {
+        "filters": [
+          {
+            "include": true,
+            "service": "spring-bedrock-demo"
+          },
+          {
+            "include": true,
+            "namespace": "spring-bedrock-demo"
+          },
+          {
+            "include": true,
+            "tech": "STS"
+          }
+        ]
+      },
+      "extractor": {
+        "type": "res_body"
+      },
+      "transforms": [
+        {
+          "type": "xml_path",
+          "config": {
+            "path": "//*[local-name()='Arn']/text()"
+          }
+        },
+        {
+          "type": "dlp_field",
+          "config": {}
+        }
+      ]
+    },
+    {
+      "id": "redact-sts-assumedroleid",
+      "filters": {
+        "filters": [
+          {
+            "include": true,
+            "service": "spring-bedrock-demo"
+          },
+          {
+            "include": true,
+            "namespace": "spring-bedrock-demo"
+          },
+          {
+            "include": true,
+            "tech": "STS"
+          }
+        ]
+      },
+      "extractor": {
+        "type": "res_body"
+      },
+      "transforms": [
+        {
+          "type": "xml_path",
+          "config": {
+            "path": "//*[local-name()='AssumedRoleId']/text()"
+          }
+        },
+        {
+          "type": "dlp_field",
+          "config": {}
+        }
+      ]
+    },
+    {
+      "id": "redact-sts-subjectfromwebidentitytoken",
+      "filters": {
+        "filters": [
+          {
+            "include": true,
+            "service": "spring-bedrock-demo"
+          },
+          {
+            "include": true,
+            "namespace": "spring-bedrock-demo"
+          },
+          {
+            "include": true,
+            "tech": "STS"
+          }
+        ]
+      },
+      "extractor": {
+        "type": "res_body"
+      },
+      "transforms": [
+        {
+          "type": "xml_path",
+          "config": {
+            "path": "//*[local-name()='SubjectFromWebIdentityToken']/text()"
+          }
+        },
+        {
+          "type": "dlp_field",
+          "config": {}
+        }
+      ]
+    }
+  ],
+  "owner": "demo",
+  "scope": {
+    "namespaces": [
+      "spring-bedrock-demo"
+    ],
+    "services": [
+      "spring-bedrock-demo"
+    ]
+  },
+  "enabled": true
+}

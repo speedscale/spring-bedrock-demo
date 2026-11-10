@@ -38,3 +38,10 @@ build/
 .claude/
 .env*
 *.log
+
+# Keep reusable traffic assets; discard generated evidence.
+!/proxymock/
+/proxymock/results/
+/proxymock/tmp/
+/proxymock/**/.replay/
+/proxymock/**/.mock/

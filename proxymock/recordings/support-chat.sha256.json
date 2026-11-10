@@ -1,0 +1,16 @@
+{
+ "README.md": "5a2c22dc5daf0a8492f42e5db58f56104f8b30f703fe913f653eec93476e6c51",
+ "bedrock-runtime.us-east-1.amazonaws.com/001.md": "e629a311fd06bb584cb38fd886de992dca9f48686c31da26ce2018a55e2327c2",
+ "bedrock-runtime.us-east-1.amazonaws.com/002.md": "bb07c57c9d77adb225f8a90aa10df916c3a9622bc1ba7f47cfda487ecab5776a",
+ "spring-bedrock-demo.spring-bedrock-demo.svc.cluster.local/001.md": "b09e1677792c0eee193e82df5f69a6a400364365ef706c12c977186087b79858",
+ "spring-bedrock-demo.spring-bedrock-demo.svc.cluster.local/002.md": "6b55f9c4f9a2fff17ac1357dd4d8fb50dfa1845618064d5dfdeede7ca5101812",
+ "spring-bedrock-demo.spring-bedrock-demo.svc.cluster.local/003.md": "d99ccbb50b1a743583a143695a30be718ffb18b9d722ddc53a1b9bd5d8cae12b",
+ "spring-bedrock-demo.spring-bedrock-demo.svc.cluster.local/004.md": "096f750472dc1dd21d7457cc274c5696b2cf68b2fe838802a5977352413d76ba",
+ "spring-bedrock-demo.spring-bedrock-demo.svc.cluster.local/005.md": "8d9ec8d7d133adf65610d1956b851ce52773feb8383d70579d45024f456e0719",
+ "spring-bedrock-demo.spring-bedrock-demo.svc.cluster.local/006.md": "d84cdaab5d7d61db8d466caec6118e4d74b5f68dde9b9c88bc1094bff775d6b4",
+ "spring-bedrock-demo.spring-bedrock-demo.svc.cluster.local/007.md": "11e4681e9fa6e8247768d89c0ba4e766fdf75fdb22390fee0be6ed2972415fe0",
+ "spring-bedrock-demo.spring-bedrock-demo.svc.cluster.local/008.md": "b8b801ea16aa66cdc35c52c19764e2265d351e15576a2b81f138075aedb30721",
+ "spring-bedrock-demo.spring-bedrock-demo.svc.cluster.local/009.md": "0617eab128507c6285e6c1c8e7dd4c2eb2110c59b0e7fb52fd18bdc4fd464de7",
+ "spring-bedrock-demo.spring-bedrock-demo.svc.cluster.local/010.md": "daa2d2988056a8edf87f3c58c09bff072cafb564acccefdef28c292ec2db1951",
+ "sts.us-east-1.amazonaws.com/001.md": "ac48a1fd2c7e52016b8216ca4097b8fcae0c2d0838a1e05ab61db60fdb8c58ad"
+}
