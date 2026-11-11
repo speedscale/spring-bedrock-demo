@@ -1,0 +1,61 @@
+{
+  "input": {
+    "kind": "local-replay",
+    "path": "proxymock/results/released-2/replay",
+    "status": "pass"
+  },
+  "accuracy": {
+    "pairs": 10,
+    "matched": 10,
+    "mismatches": 0,
+    "statusMismatches": 0,
+    "bodyMismatches": 0,
+    "rate": 100,
+    "topFailingEndpoints": []
+  },
+  "matchRate": {
+    "total": 2,
+    "matched": 2,
+    "noMatch": 0,
+    "passthrough": 0,
+    "rate": 100,
+    "noMatchRate": 0,
+    "passthroughRate": 0,
+    "mockRun": "proxymock/results/released-2/mocked",
+    "mockRunSelection": "override",
+    "topMissingSignatures": [],
+    "topMissingHosts": []
+  },
+  "goals": {
+    "verdict": "pass",
+    "passed": 2,
+    "failed": 0,
+    "goals": [
+      {
+        "name": "passAssertPct >= 100",
+        "metric": "passAssertPct",
+        "condition": ">= 100",
+        "observed": "100",
+        "status": "pass",
+        "reason": "counts assertions, not requests: each replayed request carries one assertion per configured type, so this is not the match rate"
+      },
+      {
+        "name": "failedVUsers <= 0",
+        "metric": "failedVUsers",
+        "condition": "<= 0",
+        "observed": "0",
+        "status": "pass"
+      }
+    ]
+  },
+  "httpOutput": {
+    "status": "not-evaluated",
+    "reason": "test config regression has no httpOutput assertion"
+  },
+  "sources": {
+    "accuracy": "proxymock/results/released-2/replay/replay-verdict.json",
+    "accuracy.topFailingEndpoints": "proxymock/results/released-2/replay/replay-verdict.json",
+    "goals": "proxymock/results/released-2/replay/replay-verdict.json",
+    "matchRate": "proxymock/results/released-2/mocked"
+  }
+}

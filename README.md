@@ -20,6 +20,22 @@ Example deployment and demo workflow. The S3 collector follows the [documented B
 
 [Mermaid sources and rendering instructions](docs/architecture/README.md).
 
+## Recorded-traffic integration tests
+
+See the [finished report](docs/testing/report.md). Review the [approved spec](.kiro/specs/recorded-traffic-integration-tests/spec.md) and [redacted recording](proxymock/recordings/support-chat/README.md). The suite starts this app locally with recorded Bedrock responses, compares every recorded API response, evaluates native assertions and measures native OpenAPI coverage. Local replay needs no AWS access and makes no paid model calls. STS is unused with dummy local credentials.
+
+Install proxymock, Java 21, Python 3, curl and lsof. Set `JAVA21_HOME` to your JDK 21 directory if it is not the Homebrew installation. From the repository root, use a new name for each run:
+
+```bash
+./scripts/proxymock-it.sh run-1
+./scripts/proxymock-it.sh run-2
+python3 scripts/proxymock-it-report.py report proxymock/results/run-1 proxymock/results/run-2
+```
+
+Evidence is saved separately under `proxymock/results/<run-name>/`. Keep the inputs unchanged between runs. Only recorded cases run: the documented 503 paths remain coverage gaps. The fixtures, DLP policy and reusable test assets belong in Git; generated results and caches are ignored. Raw captures and private deployment settings stay outside this repository.
+
+The saved suite was validated twice with Java 21 and released proxymock `v2.5.1322`. It uses the built-in `regression` test configuration and launches the Java binary directly under the proxymock wrapper.
+
 ## Run locally
 
 Install JDK 21 and configure AWS credentials with access to Bedrock. The application uses the AWS SDK default credential chain. When `AWS_PROFILE` is set, the launcher uses AWS CLI v2 and Python 3 to export that profile's current credentials into the JVM environment without writing them to disk.
@@ -63,7 +79,7 @@ The checked-in contract is [openapi.yaml](src/main/resources/static/openapi.yaml
 
 The reusable [Kubernetes base](k8s/base) provides one replica, a ClusterIP service, resource limits, a non-root container, and health probes. Supply your image and a `bedrock-credentials` Secret from a private deployment overlay. The application supports standard AWS environment credentials; cluster-specific credentials, capture configuration, storage settings, and endpoints belong outside this public repository.
 
-Health checks do not call Bedrock. The API has no authentication or public ingress. Use the API client Job for demo traffic; port-forwarding is available for local debugging. The starting application contains no recorded traffic, replay pipeline, or repository-specific testing skill.
+Health checks do not call Bedrock. The API has no authentication or public ingress. Use the API client Job for demo traffic; port-forwarding is available for local debugging. The shared Speedscale skills and MCP settings belong in Kiro user configuration. This repository contains the application-specific spec, test runner and redacted traffic assets.
 
 ## License
 

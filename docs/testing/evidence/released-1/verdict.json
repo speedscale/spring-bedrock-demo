@@ -1,0 +1,195 @@
+{
+  "schemaVersion": 1,
+  "mode": "replay",
+  "verdict": "pass",
+  "replayDir": "proxymock/results/released-1/replay",
+  "pairs": [
+    {
+      "endpoint": "/actuator/health",
+      "method": "GET",
+      "recordedStatus": 200,
+      "observedStatus": 200,
+      "match": "pass",
+      "bodyMatch": "pass",
+      "refUuid": "1ddce8b5-19e6-4810-bd39-a8e8feee518c",
+      "sourceFile": "proxymock/recordings/support-chat/spring-bedrock-demo.spring-bedrock-demo.svc.cluster.local/010.md",
+      "replayFile": "proxymock/results/released-1/replay/localhost/2026-11-10_12-46-17.189263Z.md",
+      "newMismatch": false,
+      "changedVsBaseline": false
+    },
+    {
+      "endpoint": "/api/chat",
+      "method": "POST",
+      "recordedStatus": 200,
+      "observedStatus": 200,
+      "match": "pass",
+      "bodyMatch": "pass",
+      "refUuid": "25e2b467-be95-452a-b7e3-6345c340559a",
+      "sourceFile": "proxymock/recordings/support-chat/spring-bedrock-demo.spring-bedrock-demo.svc.cluster.local/009.md",
+      "replayFile": "proxymock/results/released-1/replay/localhost/2026-11-10_12-46-17.182476Z.md",
+      "newMismatch": false,
+      "changedVsBaseline": false
+    },
+    {
+      "endpoint": "/api/chat",
+      "method": "POST",
+      "recordedStatus": 400,
+      "observedStatus": 400,
+      "match": "pass",
+      "bodyMatch": "pass",
+      "refUuid": "45cf3218-f583-46a6-a17d-a8da4d5d6515",
+      "sourceFile": "proxymock/recordings/support-chat/spring-bedrock-demo.spring-bedrock-demo.svc.cluster.local/008.md",
+      "replayFile": "proxymock/results/released-1/replay/localhost/2026-11-10_12-46-17.180604Z.md",
+      "newMismatch": false,
+      "changedVsBaseline": false
+    },
+    {
+      "endpoint": "/actuator/health",
+      "method": "GET",
+      "recordedStatus": 200,
+      "observedStatus": 200,
+      "match": "pass",
+      "bodyMatch": "pass",
+      "refUuid": "646aed59-0fcd-429e-882a-ec22dd7ccb4c",
+      "sourceFile": "proxymock/recordings/support-chat/spring-bedrock-demo.spring-bedrock-demo.svc.cluster.local/005.md",
+      "replayFile": "proxymock/results/released-1/replay/localhost/2026-11-10_12-46-17.175755Z.md",
+      "newMismatch": false,
+      "changedVsBaseline": false
+    },
+    {
+      "endpoint": "/actuator/health",
+      "method": "GET",
+      "recordedStatus": 200,
+      "observedStatus": 200,
+      "match": "pass",
+      "bodyMatch": "pass",
+      "refUuid": "6541446f-ce7f-4cd0-ba2e-6fc87008154b",
+      "sourceFile": "proxymock/recordings/support-chat/spring-bedrock-demo.spring-bedrock-demo.svc.cluster.local/006.md",
+      "replayFile": "proxymock/results/released-1/replay/localhost/2026-11-10_12-46-17.176951Z.md",
+      "newMismatch": false,
+      "changedVsBaseline": false
+    },
+    {
+      "endpoint": "/api/chat",
+      "method": "POST",
+      "recordedStatus": 200,
+      "observedStatus": 200,
+      "match": "pass",
+      "bodyMatch": "pass",
+      "refUuid": "78fc9160-348e-4f63-b095-7518c80dd491",
+      "sourceFile": "proxymock/recordings/support-chat/spring-bedrock-demo.spring-bedrock-demo.svc.cluster.local/003.md",
+      "replayFile": "proxymock/results/released-1/replay/localhost/2026-11-10_12-46-16.971643Z.md",
+      "newMismatch": false,
+      "changedVsBaseline": false
+    },
+    {
+      "endpoint": "/actuator/health",
+      "method": "GET",
+      "recordedStatus": 200,
+      "observedStatus": 200,
+      "match": "pass",
+      "bodyMatch": "pass",
+      "refUuid": "821c5f7e-d8b3-47ec-ac1d-f3e512e995b7",
+      "sourceFile": "proxymock/recordings/support-chat/spring-bedrock-demo.spring-bedrock-demo.svc.cluster.local/001.md",
+      "replayFile": "proxymock/results/released-1/replay/localhost/2026-11-10_12-46-16.920776Z.md",
+      "newMismatch": false,
+      "changedVsBaseline": false
+    },
+    {
+      "endpoint": "/actuator/health",
+      "method": "GET",
+      "recordedStatus": 200,
+      "observedStatus": 200,
+      "match": "pass",
+      "bodyMatch": "pass",
+      "refUuid": "8774d7b4-95fa-4c35-8e9b-727460aa5a1f",
+      "sourceFile": "proxymock/recordings/support-chat/spring-bedrock-demo.spring-bedrock-demo.svc.cluster.local/004.md",
+      "replayFile": "proxymock/results/released-1/replay/localhost/2026-11-10_12-46-17.174094Z.md",
+      "newMismatch": false,
+      "changedVsBaseline": false
+    },
+    {
+      "endpoint": "/actuator/health",
+      "method": "GET",
+      "recordedStatus": 200,
+      "observedStatus": 200,
+      "match": "pass",
+      "bodyMatch": "pass",
+      "refUuid": "d2493d6c-046b-4fa4-8490-4881c4f9c385",
+      "sourceFile": "proxymock/recordings/support-chat/spring-bedrock-demo.spring-bedrock-demo.svc.cluster.local/007.md",
+      "replayFile": "proxymock/results/released-1/replay/localhost/2026-11-10_12-46-17.178771Z.md",
+      "newMismatch": false,
+      "changedVsBaseline": false
+    },
+    {
+      "endpoint": "/api/chat",
+      "method": "POST",
+      "recordedStatus": 400,
+      "observedStatus": 400,
+      "match": "pass",
+      "bodyMatch": "pass",
+      "refUuid": "d36ae892-b7f3-4e06-bfa8-9c6d80fe6b36",
+      "sourceFile": "proxymock/recordings/support-chat/spring-bedrock-demo.spring-bedrock-demo.svc.cluster.local/002.md",
+      "replayFile": "proxymock/results/released-1/replay/localhost/2026-11-10_12-46-16.925291Z.md",
+      "newMismatch": false,
+      "changedVsBaseline": false
+    }
+  ],
+  "summary": {
+    "pairs": 10,
+    "mismatches": 0
+  },
+  "gate": {
+    "enabled": false,
+    "exitCode": 0
+  },
+  "goals": {
+    "testConfig": "regression",
+    "verdict": "pass",
+    "goals": [
+      {
+        "name": "passAssertPct \u003e= 100",
+        "metric": "passAssertPct",
+        "condition": "\u003e= 100",
+        "status": "pass",
+        "observed": "100",
+        "reason": "counts assertions, not requests: each replayed request carries one assertion per configured type, so this is not the match rate"
+      },
+      {
+        "name": "failedVUsers \u003c= 0",
+        "metric": "failedVUsers",
+        "condition": "\u003c= 0",
+        "status": "pass",
+        "observed": "0",
+        "implicit": true
+      }
+    ],
+    "assertionGroups": [
+      {
+        "index": 1,
+        "name": "assertion group 1 (httpStatusCode, httpHeaders, httpResponseSchema, httpResponseContentType)",
+        "types": [
+          "httpStatusCode",
+          "httpHeaders",
+          "httpResponseSchema",
+          "httpResponseContentType"
+        ],
+        "status": "pass",
+        "passed": 40,
+        "failed": 0
+      }
+    ],
+    "assertions": {
+      "evaluated": true,
+      "total": 40,
+      "passed": 40,
+      "failed": 0,
+      "pairs": 10
+    },
+    "combinationRule": "the run fails (exit code 1) when any goal evaluated locally misses or any --fail-if condition triggers; the two are checked independently and either one fails the run; a goal or assertion group not evaluated locally never changes the exit code"
+  },
+  "testConfig": "regression",
+  "recordingDirs": [
+    "proxymock/recordings/support-chat"
+  ]
+}
