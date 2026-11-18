@@ -36,6 +36,10 @@ Evidence is saved separately under `proxymock/results/<run-name>/`. Keep the inp
 
 The saved suite was validated twice with Java 21 and released proxymock `v2.5.1322`. It uses the built-in `regression` test configuration and launches the Java binary directly under the proxymock wrapper.
 
+## Maintain an existing suite in Kiro Crew
+
+Follow the [local suite-maintenance example](docs/testing/suite-maintenance.md) to add a new request and its Bedrock response without replacing the accepted recording. The example includes a [Crew prompt](docs/testing/crew-maintenance-prompt.md), a failing run with old mocks and two passing runs with the expanded candidate.
+
 ## Run locally
 
 Install JDK 21 and configure AWS credentials with access to Bedrock. The application uses the AWS SDK default credential chain. When `AWS_PROFILE` is set, the launcher uses AWS CLI v2 and Python 3 to export that profile's current credentials into the JVM environment without writing them to disk.

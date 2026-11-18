@@ -1,0 +1,201 @@
+{
+  "metric": "recording/schema coverage",
+  "summary": {
+    "operations": {
+      "covered": 2,
+      "total": 2
+    },
+    "statuses": {
+      "covered": 3,
+      "total": 5
+    },
+    "fields": {
+      "covered": 4,
+      "total": 7
+    }
+  },
+  "inbound_pairs": 12,
+  "matched_pairs": 12,
+  "operations": [
+    {
+      "method": "GET",
+      "path": "/actuator/health",
+      "count": 6,
+      "pairs": [
+        "localhost/2026-11-18_17-20-55.924421Z.md",
+        "localhost/2026-11-18_17-20-56.153998Z.md",
+        "localhost/2026-11-18_17-20-56.155798Z.md",
+        "localhost/2026-11-18_17-20-56.157106Z.md",
+        "localhost/2026-11-18_17-20-56.158522Z.md",
+        "localhost/2026-11-18_17-20-56.16707Z.md"
+      ],
+      "responses": [
+        {
+          "status": "200",
+          "count": 6,
+          "pairs": [
+            "localhost/2026-11-18_17-20-55.924421Z.md",
+            "localhost/2026-11-18_17-20-56.153998Z.md",
+            "localhost/2026-11-18_17-20-56.155798Z.md",
+            "localhost/2026-11-18_17-20-56.157106Z.md",
+            "localhost/2026-11-18_17-20-56.158522Z.md",
+            "localhost/2026-11-18_17-20-56.16707Z.md"
+          ],
+          "fields": [
+            {
+              "path": "$.groups",
+              "count": 6,
+              "pairs": [
+                "localhost/2026-11-18_17-20-55.924421Z.md",
+                "localhost/2026-11-18_17-20-56.153998Z.md",
+                "localhost/2026-11-18_17-20-56.155798Z.md",
+                "localhost/2026-11-18_17-20-56.157106Z.md",
+                "localhost/2026-11-18_17-20-56.158522Z.md",
+                "localhost/2026-11-18_17-20-56.16707Z.md"
+              ]
+            },
+            {
+              "path": "$.status",
+              "count": 6,
+              "pairs": [
+                "localhost/2026-11-18_17-20-55.924421Z.md",
+                "localhost/2026-11-18_17-20-56.153998Z.md",
+                "localhost/2026-11-18_17-20-56.155798Z.md",
+                "localhost/2026-11-18_17-20-56.157106Z.md",
+                "localhost/2026-11-18_17-20-56.158522Z.md",
+                "localhost/2026-11-18_17-20-56.16707Z.md"
+              ]
+            }
+          ]
+        },
+        {
+          "status": "503",
+          "count": 0,
+          "pairs": [],
+          "fields": [
+            {
+              "path": "$.groups",
+              "count": 0,
+              "pairs": []
+            },
+            {
+              "path": "$.status",
+              "count": 0,
+              "pairs": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/chat",
+      "count": 6,
+      "pairs": [
+        "localhost/2026-11-18_17-20-55.927034Z.md",
+        "localhost/2026-11-18_17-20-55.968348Z.md",
+        "localhost/2026-11-18_17-20-56.159733Z.md",
+        "localhost/2026-11-18_17-20-56.161489Z.md",
+        "localhost/2026-11-18_17-20-56.168591Z.md",
+        "localhost/2026-11-18_17-20-56.175261Z.md"
+      ],
+      "responses": [
+        {
+          "status": "200",
+          "count": 3,
+          "pairs": [
+            "localhost/2026-11-18_17-20-55.968348Z.md",
+            "localhost/2026-11-18_17-20-56.161489Z.md",
+            "localhost/2026-11-18_17-20-56.168591Z.md"
+          ],
+          "fields": [
+            {
+              "path": "$.response",
+              "count": 3,
+              "pairs": [
+                "localhost/2026-11-18_17-20-55.968348Z.md",
+                "localhost/2026-11-18_17-20-56.161489Z.md",
+                "localhost/2026-11-18_17-20-56.168591Z.md"
+              ]
+            }
+          ]
+        },
+        {
+          "status": "400",
+          "count": 3,
+          "pairs": [
+            "localhost/2026-11-18_17-20-55.927034Z.md",
+            "localhost/2026-11-18_17-20-56.159733Z.md",
+            "localhost/2026-11-18_17-20-56.175261Z.md"
+          ],
+          "fields": [
+            {
+              "path": "$.error",
+              "count": 3,
+              "pairs": [
+                "localhost/2026-11-18_17-20-55.927034Z.md",
+                "localhost/2026-11-18_17-20-56.159733Z.md",
+                "localhost/2026-11-18_17-20-56.175261Z.md"
+              ]
+            }
+          ]
+        },
+        {
+          "status": "503",
+          "count": 0,
+          "pairs": [],
+          "fields": [
+            {
+              "path": "$.error",
+              "count": 0,
+              "pairs": []
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "unknown_routes": [],
+  "undocumented_statuses": [],
+  "unsupported_bodies": [],
+  "gaps": [
+    {
+      "rank": 1,
+      "kind": "status",
+      "method": "GET",
+      "path": "/actuator/health",
+      "status": "503"
+    },
+    {
+      "rank": 2,
+      "kind": "status",
+      "method": "POST",
+      "path": "/api/chat",
+      "status": "503"
+    },
+    {
+      "rank": 3,
+      "kind": "field",
+      "method": "GET",
+      "path": "/actuator/health",
+      "status": "503",
+      "field": "$.groups"
+    },
+    {
+      "rank": 4,
+      "kind": "field",
+      "method": "GET",
+      "path": "/actuator/health",
+      "status": "503",
+      "field": "$.status"
+    },
+    {
+      "rank": 5,
+      "kind": "field",
+      "method": "POST",
+      "path": "/api/chat",
+      "status": "503",
+      "field": "$.error"
+    }
+  ]
+}
