@@ -35,6 +35,37 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+  /api/chat/summary:
+    post:
+      operationId: summarizeTicket
+      summary: Summarize a support ticket for an agent
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ChatRequest'
+            example:
+              prompt: Customer cannot sign in after a password reset. The reset link worked, but the app still rejects the new password.
+      responses:
+        '200':
+          description: A concise summary of the ticket
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SummaryResponse'
+        '400':
+          description: Missing, blank, oversized, malformed, or unknown input
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '503':
+          description: Bedrock failed or returned no text
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
   /actuator/health:
     get:
       operationId: health
@@ -76,6 +107,14 @@ components:
       required: [response]
       properties:
         response:
+          type: string
+          minLength: 1
+    SummaryResponse:
+      type: object
+      additionalProperties: false
+      required: [summary]
+      properties:
+        summary:
           type: string
           minLength: 1
     ErrorResponse:

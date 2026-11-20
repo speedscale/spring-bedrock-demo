@@ -60,6 +60,24 @@ class ChatApiTest {
         assertContractResponse("200", response.getBody());
     }
 
+    @Test
+    void summarizesATicketWithItsOwnResponseContract() throws Exception {
+        String ticket = "The reset link worked, but the app rejects the new password.";
+        String summary = "Sign-in still fails after a successful password reset.";
+        when(model.call(any(Prompt.class))).thenReturn(new ChatResponse(
+                List.of(new Generation(new AssistantMessage(summary)))));
+
+        var response = post("/api/chat/summary", json.writeValueAsString(Map.of("prompt", ticket)));
+
+        assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+        assertThat(json.readTree(response.getBody()).path("summary").asText()).isEqualTo(summary);
+        assertContractResponse("/api/chat/summary", "200", response.getBody());
+        var prompt = ArgumentCaptor.forClass(Prompt.class);
+        verify(model).call(prompt.capture());
+        assertThat(prompt.getValue().getInstructions().getFirst().getText()).contains("Summarize the support ticket");
+        assertThat(prompt.getValue().getInstructions().getLast().getText()).isEqualTo(ticket);
+    }
+
     @ParameterizedTest
     @ValueSource(strings = {"{}", "{\"prompt\":123}", "{\"prompt\":true}", "{\"prompt\":null}", "{\"prompt\":\"\"}",
             "{\"prompt\":\"   \"}", "{", "null", "{\"prompt\":\"hello\",\"history\":[]}"})
@@ -124,17 +142,25 @@ class ChatApiTest {
     }
 
     private org.springframework.http.ResponseEntity<String> post(String body) {
+        return post("/api/chat", body);
+    }
+
+    private org.springframework.http.ResponseEntity<String> post(String path, String body) {
         var headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
-        return http.postForEntity("/api/chat", new HttpEntity<>(body, headers), String.class);
+        return http.postForEntity(path, new HttpEntity<>(body, headers), String.class);
+    }
+
+    private void assertContractResponse(String status, String body) throws Exception {
+        assertContractResponse("/api/chat", status, body);
     }
 
     @SuppressWarnings("unchecked")
-    private void assertContractResponse(String status, String body) throws Exception {
+    private void assertContractResponse(String path, String status, String body) throws Exception {
         Map<String, Object> contract = new Yaml().load(getClass().getResourceAsStream("/static/openapi.yaml"));
         var paths = (Map<String, Object>) contract.get("paths");
-        var chat = (Map<String, Object>) paths.get("/api/chat");
-        var operation = (Map<String, Object>) chat.get("post");
+        var endpoint = (Map<String, Object>) paths.get(path);
+        var operation = (Map<String, Object>) endpoint.get("post");
         var responses = (Map<String, Object>) operation.get("responses");
         var response = (Map<String, Object>) responses.get(status);
         var content = (Map<String, Object>) response.get("content");
