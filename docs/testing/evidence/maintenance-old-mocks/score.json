@@ -1,0 +1,162 @@
+{
+  "input": {
+    "kind": "local-replay",
+    "path": "proxymock/results/crew-screen-old-mocks/replay",
+    "status": "mismatch"
+  },
+  "accuracy": {
+    "pairs": 12,
+    "matched": 11,
+    "mismatches": 1,
+    "statusMismatches": 1,
+    "bodyMismatches": 0,
+    "rate": 91.7,
+    "topFailingEndpoints": [
+      {
+        "method": "POST",
+        "endpoint": "/api/chat",
+        "failures": 1,
+        "statusMismatches": 1,
+        "bodyMismatches": 0
+      }
+    ]
+  },
+  "matchRate": {
+    "total": 3,
+    "matched": 2,
+    "noMatch": 1,
+    "passthrough": 0,
+    "rate": 66.7,
+    "noMatchRate": 33.3,
+    "passthroughRate": 0,
+    "mockRun": "proxymock/results/crew-screen-old-mocks/mocked",
+    "mockRunSelection": "override",
+    "topMissingSignatures": [
+      {
+        "command": "POST",
+        "host": "bedrock-runtime.us-east-1.amazonaws.com",
+        "path": "/model/us.anthropic.claude-sonnet-5-5/converse",
+        "count": 1
+      }
+    ],
+    "topMissingHosts": [
+      {
+        "host": "bedrock-runtime.us-east-1.amazonaws.com",
+        "count": 1
+      }
+    ]
+  },
+  "goals": {
+    "verdict": "fail",
+    "passed": 1,
+    "failed": 1,
+    "goals": [
+      {
+        "name": "passAssertPct >= 100",
+        "metric": "passAssertPct",
+        "condition": ">= 100",
+        "observed": "95.83",
+        "status": "fail",
+        "reason": "counts assertions, not requests: each replayed request carries one assertion per configured type, so this is not the match rate"
+      },
+      {
+        "name": "failedVUsers <= 0",
+        "metric": "failedVUsers",
+        "condition": "<= 0",
+        "observed": "0",
+        "status": "pass"
+      }
+    ]
+  },
+  "httpOutput": {
+    "status": "not-evaluated",
+    "reason": "test config regression has no httpOutput assertion"
+  },
+  "readiness": {
+    "verdict": "not-ready",
+    "score": 2,
+    "confidence": 0.67,
+    "summary": "Blocked by Mock fidelity at F (needs B) and Regression at C (needs B). No previous graded report in the trend window to compare with.",
+    "gates": false,
+    "families": [
+      {
+        "family": "Regression",
+        "letter": "C",
+        "role": "blocks",
+        "floor": "B",
+        "blocks": true,
+        "measured": "95.83% pass",
+        "detail": "2 of 48 assertions failed."
+      },
+      {
+        "family": "Performance",
+        "letter": "A",
+        "role": "advises",
+        "measured": "p99 54.98 ms",
+        "detail": "p99 54.98 ms, 95.72% under the recorded p99 of 1285.74 ms; 0% of 12 transactions got no response."
+      },
+      {
+        "family": "Resilience",
+        "letter": "n/a",
+        "role": "off",
+        "detail": "The test config has no chaos rules; nothing was injected to judge resilience."
+      },
+      {
+        "family": "Spec adherence",
+        "letter": "n/a",
+        "role": "off",
+        "detail": "no spec found: OpenAPI contract not found for spring-bedrock-demo; put it at proxymock/applications/spring-bedrock-demo.openapi.yaml or pass --spec"
+      },
+      {
+        "family": "Security",
+        "letter": "B",
+        "role": "off",
+        "measured": "2 open, worst low",
+        "detail": "2 open findings over 15 replayed HTTP calls: 0 critical, 0 high, 0 medium, 2 low. The auth probe is off in the test config; graded from static checks only."
+      },
+      {
+        "family": "Mock fidelity",
+        "letter": "F",
+        "role": "blocks",
+        "floor": "B",
+        "blocks": true,
+        "measured": "66.67% matched",
+        "detail": "2 of 3 mocked calls matched; 1 had no match, 0 passed through to the real service."
+      },
+      {
+        "family": "Coverage",
+        "letter": "n/a",
+        "role": "off",
+        "detail": "cloud only: needs the production call volume Speedscale cloud records"
+      },
+      {
+        "family": "Runtime health",
+        "letter": "n/a",
+        "role": "advises",
+        "detail": "cloud only: needs the Kubernetes events a cluster replay collects"
+      },
+      {
+        "family": "Data layer",
+        "letter": "n/a",
+        "role": "advises",
+        "detail": "The replay touched no database."
+      },
+      {
+        "family": "Trend",
+        "letter": "n/a",
+        "role": "advises",
+        "detail": "cloud only: needs the service's previous graded reports"
+      }
+    ],
+    "pathToReady": [
+      "Bring Regression from C to B: 95.83% pass now, B at >= 98%.",
+      "Bring Mock fidelity from F to B: 66.67% matched now, B at >= 97%."
+    ]
+  },
+  "sources": {
+    "accuracy": "proxymock/results/crew-screen-old-mocks/replay/replay-verdict.json",
+    "accuracy.topFailingEndpoints": "proxymock/results/crew-screen-old-mocks/replay/replay-verdict.json",
+    "goals": "proxymock/results/crew-screen-old-mocks/replay/replay-verdict.json",
+    "matchRate": "proxymock/results/crew-screen-old-mocks/mocked"
+  }
+}

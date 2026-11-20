@@ -17,9 +17,17 @@ public class ChatService {
     }
 
     public String chat(String prompt) {
+        return complete("You are a helpful support assistant. Give concise answers.", prompt);
+    }
+
+    public String summarize(String ticket) {
+        return complete("Summarize the support ticket for an agent. Include the issue and any actions already taken. Keep it concise.", ticket);
+    }
+
+    private String complete(String systemInstruction, String prompt) {
         try {
             var result = chatModel.call(new Prompt(List.of(
-                    new SystemMessage("You are a helpful support assistant. Give concise answers."),
+                    new SystemMessage(systemInstruction),
                     new UserMessage(prompt))));
             if (result == null || result.getResult() == null || result.getResult().getOutput() == null) {
                 throw new IllegalStateException("Bedrock returned no message");

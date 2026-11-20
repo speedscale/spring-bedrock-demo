@@ -1,0 +1,323 @@
+{
+  "run": "crew-expanded-b",
+  "provenance": {
+    "fixture": "proxymock/recordings/support-chat-maintained",
+    "fixtureFiles": 17,
+    "fixtureSha256": "6940d0b0a6043ca42c7d6ab84cfeb4bed15c294e7d54ea2e9b3f29e022c97bad",
+    "inboundPairs": 12,
+    "outboundPairs": 4,
+    "appRevision": "bf1c9b3",
+    "appJarSha256": "7ed2a379dd954d0c070076d869d8b32b8dff0f020b380098caf3a9b2d058cf97",
+    "openapiSha256": "74475a22f36470b0e16b4067acf2c93ab5d6f6821139dbd8b00c880ab65fa357",
+    "proxymock": "v2.5.1413",
+    "testConfig": "regression",
+    "testConfigSha256": "9dd3b0141e36bdeefd737bfb6938e8b4c4d5f989bec36ab83a0f9af879794a3b",
+    "java": [
+      "openjdk version \"21.0.12\" 2026-07-21"
+    ]
+  },
+  "checks": [
+    {
+      "name": "fixture frozen during run",
+      "status": "PASS",
+      "detail": "fixture file hashes unchanged from run start"
+    },
+    {
+      "name": "app unchanged",
+      "status": "PASS",
+      "detail": "no changes under src, pom.xml, Dockerfile, k8s, .mvn, .github"
+    },
+    {
+      "name": "redaction scan",
+      "status": "PASS",
+      "detail": "no secret or private-identifier patterns found in headers, decoded bodies or metadata"
+    },
+    {
+      "name": "native commands",
+      "status": "PASS",
+      "detail": "testConfig=0, score=0, coverageRecorded=0, coverageReplayed=0"
+    },
+    {
+      "name": "native response comparison",
+      "status": "PASS",
+      "detail": "12/12 recorded inbound cases have a verdict; status+body mismatches: 0 (status 0, body 0)"
+    },
+    {
+      "name": "evaluated assertions",
+      "status": "PASS",
+      "detail": "48 assertions over 12 requests: 48 passed, 0 failed; goal verdict PASS; replay exit 0"
+    },
+    {
+      "name": "mock outcomes",
+      "status": "PASS",
+      "detail": "Bedrock HIT 3, MISS 0, PASSTHROUGH 0 (served by recorded pairs ['001.md', '002.md', '2026-11-18_17-15-33.953695Z.md'])"
+    },
+    {
+      "name": "OpenAPI coverage",
+      "status": "PASS",
+      "detail": "replayed operations 2/2, statuses 3/5, fields 4/7; recorded baseline operations 2/2, statuses 3/5, fields 4/7"
+    }
+  ],
+  "notes": [],
+  "redaction": {
+    "patternHits": {},
+    "unredactedAuthHeaders": 0,
+    "redactedMarkers": 23
+  },
+  "cases": [
+    {
+      "case": "010.md",
+      "method": "GET",
+      "endpoint": "/actuator/health",
+      "recordedStatus": 200,
+      "observedStatus": 200,
+      "status": "pass",
+      "body": "pass",
+      "refUuid": "1ddce8b5-19e6-4810-bd39-a8e8feee518c"
+    },
+    {
+      "case": "009.md",
+      "method": "POST",
+      "endpoint": "/api/chat",
+      "recordedStatus": 200,
+      "observedStatus": 200,
+      "status": "pass",
+      "body": "pass",
+      "refUuid": "25e2b467-be95-452a-b7e3-6345c340559a"
+    },
+    {
+      "case": "2026-11-18_17-15-33.657239Z.md",
+      "method": "POST",
+      "endpoint": "/api/chat",
+      "recordedStatus": 200,
+      "observedStatus": 200,
+      "status": "pass",
+      "body": "pass",
+      "refUuid": "2d9401d6-2581-4fcb-b2ce-a9a9a1a656c9"
+    },
+    {
+      "case": "008.md",
+      "method": "POST",
+      "endpoint": "/api/chat",
+      "recordedStatus": 400,
+      "observedStatus": 400,
+      "status": "pass",
+      "body": "pass",
+      "refUuid": "45cf3218-f583-46a6-a17d-a8da4d5d6515"
+    },
+    {
+      "case": "005.md",
+      "method": "GET",
+      "endpoint": "/actuator/health",
+      "recordedStatus": 200,
+      "observedStatus": 200,
+      "status": "pass",
+      "body": "pass",
+      "refUuid": "646aed59-0fcd-429e-882a-ec22dd7ccb4c"
+    },
+    {
+      "case": "006.md",
+      "method": "GET",
+      "endpoint": "/actuator/health",
+      "recordedStatus": 200,
+      "observedStatus": 200,
+      "status": "pass",
+      "body": "pass",
+      "refUuid": "6541446f-ce7f-4cd0-ba2e-6fc87008154b"
+    },
+    {
+      "case": "003.md",
+      "method": "POST",
+      "endpoint": "/api/chat",
+      "recordedStatus": 200,
+      "observedStatus": 200,
+      "status": "pass",
+      "body": "pass",
+      "refUuid": "78fc9160-348e-4f63-b095-7518c80dd491"
+    },
+    {
+      "case": "001.md",
+      "method": "GET",
+      "endpoint": "/actuator/health",
+      "recordedStatus": 200,
+      "observedStatus": 200,
+      "status": "pass",
+      "body": "pass",
+      "refUuid": "821c5f7e-d8b3-47ec-ac1d-f3e512e995b7"
+    },
+    {
+      "case": "004.md",
+      "method": "GET",
+      "endpoint": "/actuator/health",
+      "recordedStatus": 200,
+      "observedStatus": 200,
+      "status": "pass",
+      "body": "pass",
+      "refUuid": "8774d7b4-95fa-4c35-8e9b-727460aa5a1f"
+    },
+    {
+      "case": "2026-11-18_17-15-36.172904Z.md",
+      "method": "POST",
+      "endpoint": "/api/chat",
+      "recordedStatus": 400,
+      "observedStatus": 400,
+      "status": "pass",
+      "body": "pass",
+      "refUuid": "9a235f94-f089-4cbf-b362-179a474df80a"
+    },
+    {
+      "case": "007.md",
+      "method": "GET",
+      "endpoint": "/actuator/health",
+      "recordedStatus": 200,
+      "observedStatus": 200,
+      "status": "pass",
+      "body": "pass",
+      "refUuid": "d2493d6c-046b-4fa4-8490-4881c4f9c385"
+    },
+    {
+      "case": "002.md",
+      "method": "POST",
+      "endpoint": "/api/chat",
+      "recordedStatus": 400,
+      "observedStatus": 400,
+      "status": "pass",
+      "body": "pass",
+      "refUuid": "d36ae892-b7f3-4e06-bfa8-9c6d80fe6b36"
+    }
+  ],
+  "assertions": {
+    "assertions": 48,
+    "requests": 12,
+    "passed": 48,
+    "failed": 0,
+    "groups": [
+      {
+        "index": 1,
+        "name": "assertion group 1 (httpStatusCode, httpHeaders, httpResponseSchema, httpResponseContentType)",
+        "types": [
+          "httpStatusCode",
+          "httpHeaders",
+          "httpResponseSchema",
+          "httpResponseContentType"
+        ],
+        "status": "pass",
+        "passed": 48,
+        "failed": 0
+      }
+    ],
+    "goals": [
+      {
+        "status": "PASS",
+        "goal": "passAssertPct >= 100"
+      },
+      {
+        "status": "PASS",
+        "goal": "failedVUsers <= 0"
+      }
+    ],
+    "goalVerdict": "PASS"
+  },
+  "assertionTypes": [
+    "httpStatusCode",
+    "httpHeaders",
+    "httpResponseSchema",
+    "httpResponseContentType"
+  ],
+  "mocks": {
+    "counts": {
+      "total": 3,
+      "matched": 3,
+      "noMatch": 0,
+      "passthrough": 0
+    },
+    "hits": [
+      "001.md@bedrock-runtime.us-east-1.amazonaws.com",
+      "002.md@bedrock-runtime.us-east-1.amazonaws.com",
+      "2026-11-18_17-15-33.953695Z.md@bedrock-runtime.us-east-1.amazonaws.com"
+    ],
+    "unused": [
+      {
+        "file": "proxymock/recordings/support-chat-maintained/sts.us-east-1.amazonaws.com/001.md",
+        "host": "sts.us-east-1.amazonaws.com"
+      }
+    ],
+    "httpOutput": "not-evaluated"
+  },
+  "coverage": {
+    "recorded": {
+      "operations": [
+        2,
+        2
+      ],
+      "statuses": [
+        3,
+        5
+      ],
+      "fields": [
+        4,
+        7
+      ]
+    },
+    "replayed": {
+      "operations": [
+        2,
+        2
+      ],
+      "statuses": [
+        3,
+        5
+      ],
+      "fields": [
+        4,
+        7
+      ]
+    },
+    "gaps": [
+      {
+        "rank": 1,
+        "kind": "status",
+        "method": "GET",
+        "path": "/actuator/health",
+        "status": "503"
+      },
+      {
+        "rank": 2,
+        "kind": "status",
+        "method": "POST",
+        "path": "/api/chat",
+        "status": "503"
+      },
+      {
+        "rank": 3,
+        "kind": "field",
+        "method": "GET",
+        "path": "/actuator/health",
+        "status": "503",
+        "field": "$.groups"
+      },
+      {
+        "rank": 4,
+        "kind": "field",
+        "method": "GET",
+        "path": "/actuator/health",
+        "status": "503",
+        "field": "$.status"
+      },
+      {
+        "rank": 5,
+        "kind": "field",
+        "method": "POST",
+        "path": "/api/chat",
+        "status": "503",
+        "field": "$.error"
+      }
+    ],
+    "unexpected": {
+      "unknown_routes": 0,
+      "undocumented_statuses": 0,
+      "unsupported_bodies": 0
+    }
+  },
+  "result": "PASS"
+}
