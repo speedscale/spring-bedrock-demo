@@ -32,9 +32,13 @@ Install proxymock, Java 21, Python 3, curl and lsof. Set `JAVA21_HOME` to your J
 python3 scripts/proxymock-it-report.py report proxymock/results/run-1 proxymock/results/run-2
 ```
 
-Evidence is saved separately under `proxymock/results/<run-name>/`. Keep the inputs unchanged between runs. Only recorded cases run: the documented 503 paths remain coverage gaps. The fixtures, DLP policy and reusable test assets belong in Git; generated results and caches are ignored. Raw captures and private deployment settings stay outside this repository.
+Evidence is saved separately under `proxymock/results/<run-name>/`. Keep the inputs unchanged between runs. The accepted recording covers the original endpoints. It has gaps for the documented 503 responses and the ticket-summary operation. The fixtures, DLP policy and reusable test assets belong in Git; generated results and caches are ignored. Raw captures and private deployment settings stay outside this repository.
 
 The saved suite was validated twice with Java 21 and released proxymock `v2.5.1322`. It uses the built-in `regression` test configuration and launches the Java binary directly under the proxymock wrapper.
+
+## Maintain an existing suite in Kiro Crew
+
+Follow the [suite-maintenance guide](docs/testing/suite-maintenance.md) to record the new ticket-summary operation and its Bedrock response, add both to the accepted suite, and compare OpenAPI coverage.
 
 ## Run locally
 
@@ -55,7 +59,7 @@ curl --fail http://localhost:8080/api/chat \
 ./scripts/smoke-test.sh
 ```
 
-Successful calls return `{"response":"..."}`. Invalid requests return HTTP 400; Bedrock failures or empty model responses return HTTP 503 with `{"error":"..."}`. Requests accept only a nonblank `prompt`, up to 4000 characters. Each request is independent, with no conversation history or streaming.
+`POST /api/chat` returns `{"response":"..."}`. `POST /api/chat/summary` accepts a support ticket as the `prompt` and returns `{"summary":"..."}`. Invalid requests return HTTP 400; Bedrock failures or empty model responses return HTTP 503 with `{"error":"..."}`. Requests accept only a nonblank `prompt`, up to 4000 characters. Each request is independent, with no conversation history or streaming.
 
 ## Generate demo traffic in Kubernetes
 

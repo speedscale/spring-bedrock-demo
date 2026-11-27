@@ -1,0 +1,136 @@
+{
+  "input": {
+    "kind": "local-replay",
+    "path": "proxymock/results/crew-expanded-b/replay",
+    "status": "pass"
+  },
+  "accuracy": {
+    "pairs": 12,
+    "matched": 12,
+    "mismatches": 0,
+    "statusMismatches": 0,
+    "bodyMismatches": 0,
+    "rate": 100,
+    "topFailingEndpoints": []
+  },
+  "matchRate": {
+    "total": 3,
+    "matched": 3,
+    "noMatch": 0,
+    "passthrough": 0,
+    "rate": 100,
+    "noMatchRate": 0,
+    "passthroughRate": 0,
+    "mockRun": "proxymock/results/crew-expanded-b/mocked",
+    "mockRunSelection": "override",
+    "topMissingSignatures": [],
+    "topMissingHosts": []
+  },
+  "goals": {
+    "verdict": "pass",
+    "passed": 2,
+    "failed": 0,
+    "goals": [
+      {
+        "name": "passAssertPct >= 100",
+        "metric": "passAssertPct",
+        "condition": ">= 100",
+        "observed": "100",
+        "status": "pass",
+        "reason": "counts assertions, not requests: each replayed request carries one assertion per configured type, so this is not the match rate"
+      },
+      {
+        "name": "failedVUsers <= 0",
+        "metric": "failedVUsers",
+        "condition": "<= 0",
+        "observed": "0",
+        "status": "pass"
+      }
+    ]
+  },
+  "httpOutput": {
+    "status": "not-evaluated",
+    "reason": "test config regression has no httpOutput assertion"
+  },
+  "readiness": {
+    "verdict": "ready",
+    "score": 4,
+    "confidence": 1,
+    "summary": "Every blocking family is at or above its floor (2 graded). No previous graded report in the trend window to compare with.",
+    "gates": false,
+    "families": [
+      {
+        "family": "Regression",
+        "letter": "A",
+        "role": "blocks",
+        "floor": "B",
+        "measured": "100% pass",
+        "detail": "0 of 48 assertions failed."
+      },
+      {
+        "family": "Performance",
+        "letter": "A",
+        "role": "advises",
+        "measured": "p99 40.33 ms",
+        "detail": "p99 40.33 ms, 96.86% under the recorded p99 of 1285.74 ms; 0% of 12 transactions got no response."
+      },
+      {
+        "family": "Resilience",
+        "letter": "n/a",
+        "role": "off",
+        "detail": "The test config has no chaos rules; nothing was injected to judge resilience."
+      },
+      {
+        "family": "Spec adherence",
+        "letter": "n/a",
+        "role": "off",
+        "detail": "no spec found: OpenAPI contract not found for spring-bedrock-demo; put it at proxymock/applications/spring-bedrock-demo.openapi.yaml or pass --spec"
+      },
+      {
+        "family": "Security",
+        "letter": "B",
+        "role": "off",
+        "measured": "2 open, worst low",
+        "detail": "2 open findings over 15 replayed HTTP calls: 0 critical, 0 high, 0 medium, 2 low. The auth probe is off in the test config; graded from static checks only."
+      },
+      {
+        "family": "Mock fidelity",
+        "letter": "A",
+        "role": "blocks",
+        "floor": "B",
+        "measured": "100% matched",
+        "detail": "3 of 3 mocked calls matched; 0 had no match, 0 passed through to the real service."
+      },
+      {
+        "family": "Coverage",
+        "letter": "n/a",
+        "role": "off",
+        "detail": "cloud only: needs the production call volume Speedscale cloud records"
+      },
+      {
+        "family": "Runtime health",
+        "letter": "n/a",
+        "role": "advises",
+        "detail": "cloud only: needs the Kubernetes events a cluster replay collects"
+      },
+      {
+        "family": "Data layer",
+        "letter": "n/a",
+        "role": "advises",
+        "detail": "The replay touched no database."
+      },
+      {
+        "family": "Trend",
+        "letter": "n/a",
+        "role": "advises",
+        "detail": "cloud only: needs the service's previous graded reports"
+      }
+    ]
+  },
+  "sources": {
+    "accuracy": "proxymock/results/crew-expanded-b/replay/replay-verdict.json",
+    "accuracy.topFailingEndpoints": "proxymock/results/crew-expanded-b/replay/replay-verdict.json",
+    "goals": "proxymock/results/crew-expanded-b/replay/replay-verdict.json",
+    "matchRate": "proxymock/results/crew-expanded-b/mocked"
+  }
+}

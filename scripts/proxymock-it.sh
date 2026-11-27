@@ -12,10 +12,12 @@ cd "$(dirname "$0")/.."
 run="${1:?usage: scripts/proxymock-it.sh <run-name>}"
 [[ "$run" =~ ^[A-Za-z0-9._-]+$ ]] || { echo "run name must match [A-Za-z0-9._-]+" >&2; exit 2; }
 
-recording=proxymock/recordings/support-chat
+recording="${PROXYMOCK_IT_RECORDING:-proxymock/recordings/support-chat}"
+mock_recording="${PROXYMOCK_IT_MOCK_RECORDING:-$recording}"
 spec=src/main/resources/static/openapi.yaml
 test_config="${PROXYMOCK_IT_TEST_CONFIG:-regression}"
-app_port=8080
+app_port="${PROXYMOCK_IT_APP_PORT:-8080}"
+proxy_port="${PROXYMOCK_IT_PROXY_PORT:-4140}"
 startup_limit=120
 out="proxymock/results/$run"
 
@@ -33,9 +35,10 @@ proxymock replay score --help >/dev/null 2>&1 || fail "proxymock lacks 'replay s
 mock_help=$(proxymock mock --help 2>&1)
 [[ "$mock_help" == *"--no-passthrough"* ]] || fail "proxymock mock lacks --no-passthrough"
 [[ -d "$recording" ]] || fail "accepted recording missing: $recording"
+[[ -d "$mock_recording" ]] || fail "mock recording missing: $mock_recording"
 [[ -f "$spec" ]] || fail "OpenAPI contract missing: $spec"
 [[ ! -e "$out" ]] || fail "$out already exists; use a new run name"
-for port in "$app_port" 4140; do
+for port in "$app_port" "$proxy_port"; do
   if lsof -nP -iTCP:"$port" -sTCP:LISTEN >/dev/null 2>&1; then fail "port $port is already in use"; fi
 done
 
@@ -71,7 +74,7 @@ clean_env=(env -i HOME="$HOME" PATH="$PATH" TMPDIR="${TMPDIR:-/tmp}" USER="${USE
   AWS_EC2_METADATA_DISABLED=true)
 
 "${clean_env[@]}" proxymock mock \
-  --in "$recording" --out "$out/mocked" --no-passthrough \
+  --in "$mock_recording" --out "$out/mocked" --no-passthrough --proxy-out-port "$proxy_port" \
   --log-to "$out/mock.log" --app-log-to "$out/app.log" --timeout 10m \
   -- "$java21/bin/java" -jar target/app.jar >"$out/mock.stdout" 2>&1 &
 mock_pid=$!
